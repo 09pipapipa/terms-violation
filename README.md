@@ -1,39 +1,45 @@
-# terms-violation
+- アプリケーション名
+  terms_violation
 
-This template should help get you started developing with Vue 3 in Vite.
+アプリケーション概要  
+製造業、小売業、飲食業における従業員のインターネットリテラシーの強化。  
+従業員が起こす不祥事の未然防止のため。
 
-## Recommended IDE Setup
+\*\* URL
 
-[VSCode](https://code.visualstudio.com/) + [Volar](https://marketplace.visualstudio.com/items?itemName=Vue.volar) (and disable Vetur).
+\*\* 利用方法
 
-## Type Support for `.vue` Imports in TS
+①TOPページの不祥事を起こした後の従業員への企業からの対応、  
+世間からの批判をまとめた動画見る。  
+②次ページに進み、全１０問のテストを行う。  
+　制限時間は１０分に設定し時間が来たら強制的に採点に入る。  
+③データベースには保存せず８０点未満なら再テストを行う。
 
-TypeScript cannot handle type information for `.vue` imports by default, so we replace the `tsc` CLI with `vue-tsc` for type checking. In editors, we need [Volar](https://marketplace.visualstudio.com/items?itemName=Vue.volar) to make the TypeScript language service aware of `.vue` types.
+\*\* アプリケーションを作成した背景  
+①昨今スマートフォンなどを使い簡単に動画を撮影しSNSに挙げることができるため  
+危機意識の低下がみられます。  
+②また人材不足により、責任者不在状態で作業場にスマートフォンを持ち込め、不祥事に繋がることも原因。  
+③実際のSNS炎上後の企業からの損害賠償の請求額、  
+住所や名前を特定された場合の動画を視聴させ危機意識を持たせる。  
+④責任者には従業員、アルバイトは企業からのルールなどは時間が  
+経つと忘れていくものとして意識させるよう社員もテストを行う。
 
-## Customize configuration
+\*\* 開発環境
 
-See [Vite Configuration Reference](https://vitejs.dev/config/).
+・HTML  
+・CSS  
+・Javascript  
+・Vue.js  
+・Bootstrap
 
-## Project Setup
+\*\* その他  
+・Git  
+・Render  
+・Vs Code
 
-```sh
-npm install
-```
-
-### Compile and Hot-Reload for Development
-
-```sh
-npm run dev
-```
-
-### Type-Check, Compile and Minify for Production
-
-```sh
-npm run build
-```
-
-### Lint with [ESLint](https://eslint.org/)
-
-```sh
-npm run lint
-```
+\*\* 工夫した点  
+随時更新予定、実装したい機能  
+・テスト中は制限時間の表示  
+・制限時間が来たら強制的に結果ページへ。  
+・チェックした個所はローカルサーバーへ一時保存する。  
+・間違えた箇所だけ結果を表示する。
