@@ -25,7 +25,8 @@ import TheFooter from '@/components/TheFooter.vue'
 }
 .main {
   flex: 1;
-  padding: 16px;
+  padding: 0;
+  margin: 0;
 }
 @media (min-width: 1024px) {
   header {
