@@ -1,19 +1,33 @@
-import type TheHeader from "./components/TheHeader.vue";
-
-<script setup lang="ja">
+<script setup lang="ts">
 import TheHeader from '@/components/TheHeader.vue'
+import MainContents from './components/MainContents.vue'
 import TheFooter from '@/components/TheFooter.vue'
 </script>
 
 <template>
   <div class="wrap">
     <TheHeader />
-    <MainContents />
+    <main class="main"><MainContents /></main>
     <TheFooter />
   </div>
 </template>
 
 <style scoped>
+.wrap {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  min-height: 96vh;
+  padding: 0;
+  margin: 0;
+  font-family: Arial, Helvetica, sans-serif;
+  background-color: #ebdc9b;
+}
+.main {
+  flex: 1;
+  padding: 0;
+  margin: 0;
+}
 @media (min-width: 1024px) {
   header {
     display: flex;
