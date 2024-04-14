@@ -1,3 +1,13 @@
+<script setup lang="ts">
+import { ref } from 'vue'
+
+const questionButton = ref(false)
+
+const handleClick = () => {
+  questionButton.value = !questionButton.value
+}
+</script>
+
 <template>
   <div class="question-container">
     <div class="question-list">
@@ -6,25 +16,41 @@
         <h2 class="quiz-question">薬品補充時してはいけないことは？</h2>
         <ul class="question-answer">
           <li>
-            <label class="question-button button01">
+            <label
+              class="question-button button01"
+              :class="{ 'demo active': questionButton, demo: !questionButton }"
+              @click="handleClick"
+            >
               <input name="radio" type="radio" value="" />
               <span class="question-text01">防護眼鏡をかける</span>
             </label>
           </li>
           <li>
-            <label class="question-button button02">
+            <label
+              class="question-button button02"
+              :class="{ 'demo active': questionButton, demo: !questionButton }"
+              @click="handleClick"
+            >
               <input name="radio" type="radio" value="" />
               <span class="question-text02">エプロンをする</span>
             </label>
           </li>
           <li>
-            <label class="question-button button03">
+            <label
+              class="question-button button03"
+              :class="{ 'demo active': questionButton, demo: !questionButton }"
+              @click="handleClick"
+            >
               <input name="radio" type="radio" value="" />
               <span class="question-text03">ゴム手袋をかける</span>
             </label>
           </li>
           <li>
-            <label class="question-button button04">
+            <label
+              class="question-button button04"
+              :class="{ 'demo active': questionButton, demo: !questionButton }"
+              @click="handleClick"
+            >
               <input name="radio" type="radio" value="" />
               <span class="question-text04">注ぎ口の掃除をする。</span>
             </label>
@@ -79,9 +105,15 @@
   border: 1px solid #000;
   line-height: 1.16;
   font-size: 18px;
-  padding: 4px 40px 4px 8px;
+  padding: 4px 40px 4px 40px;
   height: 60px;
   display: flex;
   align-items: center;
+}
+.question-button input[type='radio']:checked + span {
+  color: red;
+}
+.question-button input[type='radio'] {
+  display: none;
 }
 </style>
