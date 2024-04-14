@@ -52,6 +52,7 @@
   box-shadow: 5px 5px 10px rgba(0, 0, 0, 5);
   text-decoration: none;
   text-align: center;
+  color: black;
 }
 
 .btn-start:hover {
