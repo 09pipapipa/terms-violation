@@ -31,7 +31,7 @@ const handleClick = () => {
               :class="{ 'demo active': questionButton, demo: !questionButton }"
               @click="handleClick"
             >
-              <input name="radio" type="radio" value="" />
+              <input name="radio1" type="radio" value="" />
               <span class="question-text02">エプロンをする</span>
             </label>
           </li>
@@ -41,7 +41,7 @@ const handleClick = () => {
               :class="{ 'demo active': questionButton, demo: !questionButton }"
               @click="handleClick"
             >
-              <input name="radio" type="radio" value="" />
+              <input name="radio1" type="radio" value="" />
               <span class="question-text03">ゴム手袋をかける</span>
             </label>
           </li>
@@ -51,8 +51,56 @@ const handleClick = () => {
               :class="{ 'demo active': questionButton, demo: !questionButton }"
               @click="handleClick"
             >
-              <input name="radio" type="radio" value="" />
+              <input name="radio1" type="radio" value="" />
               <span class="question-text04">注ぎ口の掃除をする。</span>
+            </label>
+          </li>
+        </ul>
+      </div>
+    </div>
+    <div class="question-list">
+      <div class="question-content">
+        <div class="quiz-number">問2</div>
+        <h2 class="quiz-question">映像パターン2のSNS動画拡散はなぜ起こった？</h2>
+        <ul class="question-answer">
+          <li>
+            <label
+              class="question-button button01"
+              :class="{ 'demo active': questionButton, demo: !questionButton }"
+              @click="handleClick"
+            >
+              <input name="radio2" type="radio" value="" />
+              <span class="question-text01">スマートフォンの持ち込みを行った。</span>
+            </label>
+          </li>
+          <li>
+            <label
+              class="question-button button02"
+              :class="{ 'demo active': questionButton, demo: !questionButton }"
+              @click="handleClick"
+            >
+              <input name="radio2" type="radio" value="" />
+              <span class="question-text02">空調が壊れていたから。</span>
+            </label>
+          </li>
+          <li>
+            <label
+              class="question-button button03"
+              :class="{ 'demo active': questionButton, demo: !questionButton }"
+              @click="handleClick"
+            >
+              <input name="radio2" type="radio" value="" />
+              <span class="question-text03">お客様が誰もいなかった。</span>
+            </label>
+          </li>
+          <li>
+            <label
+              class="question-button button04"
+              :class="{ 'demo active': questionButton, demo: !questionButton }"
+              @click="handleClick"
+            >
+              <input name="radio2" type="radio" value="" />
+              <span class="question-text04">仕事が早く終わったから。</span>
             </label>
           </li>
         </ul>
@@ -74,6 +122,7 @@ const handleClick = () => {
   border: 1px solid #222;
   background-color: rgba(#fff, 0.4);
   box-shadow: 2px 2px 4px rgba();
+  margin-bottom: 10px;
 }
 .quiz-number {
   text-align: center;
@@ -111,7 +160,7 @@ const handleClick = () => {
   align-items: center;
 }
 .question-button input[type='radio']:checked + span {
-  color: red;
+  color: gray;
 }
 .question-button input[type='radio'] {
   display: none;
