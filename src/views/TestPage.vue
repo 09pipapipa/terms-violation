@@ -33,99 +33,24 @@ const currentQuestion = computed(() => questions[questionIndex.value])
 <template>
   <div class="question-container">
     <div class="question-list">
-      <div class="question-content">
-        <div class="quiz-number">問{{ questionIndex + 1 }}</div>
-        <h2 class="quiz-question">{{ currentQuestion.question }}</h2>
-        <ul class="question-answer">
-          <li>
-            <label
-              class="question-button button01"
-              :class="{ 'demo active': questionButton, demo: !questionButton }"
-              @click="handleClick"
-            >
-              <input name="radio" type="radio" value="" />
-              <span class="question-text01">防護眼鏡をかける</span>
-            </label>
-          </li>
-          <li>
-            <label
-              class="question-button button02"
-              :class="{ 'demo active': questionButton, demo: !questionButton }"
-              @click="handleClick"
-            >
-              <input name="radio1" type="radio" value="" />
-              <span class="question-text02">エプロンをする</span>
-            </label>
-          </li>
-          <li>
-            <label
-              class="question-button button03"
-              :class="{ 'demo active': questionButton, demo: !questionButton }"
-              @click="handleClick"
-            >
-              <input name="radio1" type="radio" value="" />
-              <span class="question-text03">ゴム手袋をかける</span>
-            </label>
-          </li>
-          <li>
-            <label
-              class="question-button button04"
-              :class="{ 'demo active': questionButton, demo: !questionButton }"
-              @click="handleClick"
-            >
-              <input name="radio1" type="radio" value="" />
-              <span class="question-text04">注ぎ口の掃除をする。</span>
-            </label>
-          </li>
-        </ul>
-      </div>
-    </div>
-    <div class="question-list">
-      <div class="question-content">
-        <div class="quiz-number">問{{ questionIndex + 2 }}</div>
-        <h2 class="quiz-question">映像パターン2のSNS動画拡散はなぜ起こった？</h2>
-        <ul class="question-answer">
-          <li>
-            <label
-              class="question-button button01"
-              :class="{ 'demo active': questionButton, demo: !questionButton }"
-              @click="handleClick"
-            >
-              <input name="radio2" type="radio" value="" />
-              <span class="question-text01">スマートフォンの持ち込みを行った。</span>
-            </label>
-          </li>
-          <li>
-            <label
-              class="question-button button02"
-              :class="{ 'demo active': questionButton, demo: !questionButton }"
-              @click="handleClick"
-            >
-              <input name="radio2" type="radio" value="" />
-              <span class="question-text02">空調が壊れていたから。</span>
-            </label>
-          </li>
-          <li>
-            <label
-              class="question-button button03"
-              :class="{ 'demo active': questionButton, demo: !questionButton }"
-              @click="handleClick"
-            >
-              <input name="radio2" type="radio" value="" />
-              <span class="question-text03">お客様が誰もいなかった。</span>
-            </label>
-          </li>
-          <li>
-            <label
-              class="question-button button04"
-              :class="{ 'demo active': questionButton, demo: !questionButton }"
-              @click="handleClick"
-            >
-              <input name="radio2" type="radio" value="" />
-              <span class="question-text04">仕事が早く終わったから。</span>
-            </label>
-          </li>
-        </ul>
+      <div v-for="(question, index) in questions" :key="index" class="question-content">
+        <div class="quiz-number">問{{ index + 1 }}</div>
+        <h2 class="quiz-question">{{ question.question }}</h2>
+        <div class="question-answer">
+          <label
+            v-for="(answer, answerIndex) in question.answers"
+            :key="answerIndex"
+            :class="[
+              'question-button',
+              `button${answerIndex + 1}`,
+              { 'demo active': questionButton, demo: !questionButton }
+            ]"
+            @click="handleClick"
+          >
+            <input :name="`radio${index}`" type="radio" :value="answerIndex" />
+            <span :class="`question-text${answerIndex + 1}`">{{ answer }}</span>
+          </label>
+        </div>
       </div>
     </div>
   </div>
@@ -169,10 +94,10 @@ const currentQuestion = computed(() => questions[questionIndex.value])
   gap: 20px;
   padding: 0 200px 100px;
 }
-.question-answer li {
+.question-answer {
   list-style: none;
 }
-.question-answer li label {
+.question-answer label {
   border: 1px solid #000;
   line-height: 1.16;
   font-size: 18px;
