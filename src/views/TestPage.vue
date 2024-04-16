@@ -3,7 +3,11 @@ import { ref, computed } from 'vue'
 
 const questionButton = ref(false)
 
-const handleClick = () => {
+const handleClick = (questionIndex, answerIndex) => {
+  const selectedAnswer = answerIndex
+
+  localStorage.setItem('question${questionIndex}', selectedAnswer)
+  // ボタンの状態を切り替える
   questionButton.value = !questionButton.value
 }
 
@@ -45,7 +49,7 @@ const currentQuestion = computed(() => questions[questionIndex.value])
               `button${answerIndex + 1}`,
               { 'demo active': questionButton, demo: !questionButton }
             ]"
-            @click="handleClick"
+            @click="handleClick(index, answerIndex)"
           >
             <input :name="`radio${index}`" type="radio" :value="answerIndex" />
             <span :class="`question-text${answerIndex + 1}`">{{ answer }}</span>
