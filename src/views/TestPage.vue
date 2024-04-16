@@ -1,18 +1,40 @@
 <script setup lang="ts">
-import { ref } from 'vue'
+import { ref, computed } from 'vue'
 
 const questionButton = ref(false)
 
 const handleClick = () => {
   questionButton.value = !questionButton.value
 }
+
+const questionIndex = ref(0)
+
+const questions = [
+  {
+    question: '薬品補充時してはいけないことは？',
+    answers: ['防護眼鏡をかける', 'エプロンをする', 'ゴム手袋をかける', '注ぎ口の掃除をする。'],
+    answer: 1
+  },
+  {
+    question: '映像パターン2のSNS動画拡散はなぜ起こった？',
+    answers: [
+      'スマートフォンの持ち込みを行った。',
+      '空調が壊れていたから。',
+      'お客様が誰もいなかった。',
+      '仕事が早く終わったから。'
+    ],
+    answer: 0
+  }
+]
+
+const currentQuestion = computed(() => questions[questionIndex.value])
 </script>
 
 <template>
   <div class="question-container">
     <div class="question-list">
       <div class="question-content">
-        <div class="quiz-number">問１</div>
+        <div class="quiz-number">問{{ questionIndex + 1 }}</div>
         <h2 class="quiz-question">薬品補充時してはいけないことは？</h2>
         <ul class="question-answer">
           <li>
