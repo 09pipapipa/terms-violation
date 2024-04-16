@@ -35,7 +35,7 @@ const currentQuestion = computed(() => questions[questionIndex.value])
     <div class="question-list">
       <div class="question-content">
         <div class="quiz-number">問{{ questionIndex + 1 }}</div>
-        <h2 class="quiz-question">薬品補充時してはいけないことは？</h2>
+        <h2 class="quiz-question">{{ currentQuestion.question }}</h2>
         <ul class="question-answer">
           <li>
             <label
@@ -82,7 +82,7 @@ const currentQuestion = computed(() => questions[questionIndex.value])
     </div>
     <div class="question-list">
       <div class="question-content">
-        <div class="quiz-number">問2</div>
+        <div class="quiz-number">問{{ questionIndex + 2 }}</div>
         <h2 class="quiz-question">映像パターン2のSNS動画拡散はなぜ起こった？</h2>
         <ul class="question-answer">
           <li>
