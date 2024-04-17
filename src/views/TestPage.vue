@@ -1,18 +1,6 @@
 <script setup lang="ts">
 import { ref, computed } from 'vue'
 
-const questionButton = ref(false)
-const selectedAnswers = ref(Array.from({ length: questions.length }, () => null))
-const showResult = ref(Array(questions.length).fill(false))
-
-const handleClick = (questionIndex, answerIndex) => {
-  selectedAnswers.value[questionIndex] = answerIndex
-  showResult.value[questionIndex] = ture
-}
-
-const isCorrect = (questionIndex) => {
-  return selectedAnswers.value[questionIndex] === questions[questionIndex].answer
-}
 const questionIndex = ref(0)
 
 const questions = [
@@ -32,6 +20,18 @@ const questions = [
     answer: 0 //正解はスマートフォン
   }
 ]
+
+const questionButton = ref(false)
+const selectedAnswers = ref(Array.from({ length: questions.length }, () => null))
+const showResult = ref(Array.from({ length: questions.length }, () => false))
+
+const handleClick = (questionIndex, answerIndex) => {
+  selectedAnswers.value[questionIndex] = answerIndex
+  showResult.value[questionIndex] = true
+}
+const isCorrect = (questionIndex) => {
+  return selectedAnswers.value[questionIndex] === questions[questionIndex].answer
+}
 
 const currentQuestion = computed(() => questions[questionIndex.value])
 </script>
