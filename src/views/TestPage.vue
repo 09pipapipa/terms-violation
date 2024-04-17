@@ -2,11 +2,16 @@
 import { ref, computed } from 'vue'
 
 const questionButton = ref(false)
+const setItem = ref<{ id: number }[]>([])
 
 const handleClick = (questionIndex, answerIndex) => {
   const selectedAnswer = answerIndex
+  const id = new Date().getTime()
 
-  localStorage.setItem('question${questionIndex}', selectedAnswer)
+  setItem.value.push({ id: id })
+  const key = 'question${questionIndex}_answer${answerIndex}'
+
+  localStorage.setItem(key.toString(), JSON.stringify(selectedAnswer))
   // ボタンの状態を切り替える
   questionButton.value = !questionButton.value
 }
