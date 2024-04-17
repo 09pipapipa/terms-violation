@@ -2,27 +2,24 @@
 import { ref, computed } from 'vue'
 
 const questionButton = ref(false)
-const setItem = ref<{ id: number }[]>([])
+const selectedAnswers = ref(Array.from({ length: questions.length }, () => null))
+const showResult = ref(Array(questions.length).fill(false))
 
 const handleClick = (questionIndex, answerIndex) => {
-  const selectedAnswer = answerIndex
-  const id = new Date().getTime()
-
-  setItem.value.push({ id: id })
-  const key = 'question${questionIndex}_answer${answerIndex}'
-
-  localStorage.setItem(key.toString(), JSON.stringify(selectedAnswer))
-  // ボタンの状態を切り替える
-  questionButton.value = !questionButton.value
+  selectedAnswers.value[questionIndex] = answerIndex
+  showResult.value[questionIndex] = ture
 }
 
+const isCorrect = (questionIndex) => {
+  return selectedAnswers.value[questionIndex] === questions[questionIndex].answer
+}
 const questionIndex = ref(0)
 
 const questions = [
   {
     question: '薬品補充時してはいけないことは？',
     answers: ['防護眼鏡をかける', 'エプロンをする', 'ゴム手袋をかける', '注ぎ口の掃除をする。'],
-    answer: 1
+    answer: 3 //正解は注ぎ口の～
   },
   {
     question: '映像パターン2のSNS動画拡散はなぜ起こった？',
@@ -32,7 +29,7 @@ const questions = [
       'お客様が誰もいなかった。',
       '仕事が早く終わったから。'
     ],
-    answer: 0
+    answer: 0 //正解はスマートフォン
   }
 ]
 
@@ -59,6 +56,15 @@ const currentQuestion = computed(() => questions[questionIndex.value])
             <input :name="`radio${index}`" type="radio" :value="answerIndex" />
             <span :class="`question-text${answerIndex + 1}`">{{ answer }}</span>
           </label>
+        </div>
+        <div v-if="showResult[index]" class="result-message">
+          <p>
+            {{
+              isCorrect(index)
+                ? '正解です'
+                : '不正解、正解は' + questions[index].answers[questions[index].answer] + 'です'
+            }}
+          </p>
         </div>
       </div>
     </div>
