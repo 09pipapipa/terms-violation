@@ -26,7 +26,13 @@ const selectedAnswers = ref(Array.from({ length: questions.length }, () => null)
 const showResult = ref(Array.from({ length: questions.length }, () => false))
 
 const handleClick = (questionIndex, answerIndex) => {
+  //if文を使い回答が行われている場合は処理を中止
+  if (selectedAnswers.value[questionIndex] !== null) {
+    return
+  }
+  // 質問に回答を設定する
   selectedAnswers.value[questionIndex] = answerIndex
+  // 回答が表示されるようにする
   showResult.value[questionIndex] = true
 }
 const isCorrect = (questionIndex) => {
