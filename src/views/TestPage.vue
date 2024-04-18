@@ -1,6 +1,11 @@
 <script setup lang="ts">
+//questionIndex クイズの現在の質問のインデックスを追跡
+//questionButton 各質問に対する選択肢の回答が選択されたかどうかを追跡
+//selectedAnswers ユーザーが選択した各質問の回答を追跡するための配列
+//showResult 各質問の回答が表示されるかどうかを追跡
 import { ref, computed } from 'vue'
 
+//ref 関数を使用してリアクティブな変数を作成
 const questionIndex = ref(0)
 
 const questions = [
@@ -39,11 +44,15 @@ const isCorrect = (questionIndex) => {
   return selectedAnswers.value[questionIndex] === questions[questionIndex].answer
 }
 
+//正解数を算出する
 const calculateScore = () => {
+  //正解数の初期化
   let score = 0
+  //for ループの条件式 i < questions.length(//questions.lengthは変数の要素の数クイズの質問の数) によって、ループが問題の数だけ繰り返される
   for (let i = 0; i < questions.length; i++) {
+    //isCorrect(i) を呼び出して、質問 iが正解か判断
     if (isCorrect(i)) {
-      score++
+      score++ //正解ならscoreを1増やす
     }
   }
   return score
