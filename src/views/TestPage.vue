@@ -39,6 +39,16 @@ const isCorrect = (questionIndex) => {
   return selectedAnswers.value[questionIndex] === questions[questionIndex].answer
 }
 
+const calculateScore = () => {
+  let score = 0
+  for (let i = 0; i < questions.length; i++) {
+    if (isCorrect(i)) {
+      score++
+    }
+  }
+  return score
+}
+
 const currentQuestion = computed(() => questions[questionIndex.value])
 </script>
 
@@ -73,6 +83,9 @@ const currentQuestion = computed(() => questions[questionIndex.value])
           </p>
         </div>
       </div>
+    </div>
+    <div class="total-score">
+      <p>正解数:{{ calculateScore() }}/ {{ questions.length }}</p>
     </div>
   </div>
 </template>
