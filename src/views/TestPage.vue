@@ -8,6 +8,7 @@ import { ref, computed } from 'vue'
 //ref 関数を使用してリアクティブな変数を作成
 const questionIndex = ref(0)
 
+//クイズ情報を格納する
 const questions = [
   {
     question: '薬品補充時してはいけないことは？',
@@ -25,9 +26,11 @@ const questions = [
     answer: 0 //正解はスマートフォン
   }
 ]
-
+//questionButtonをリアクティブ変数にする、初期値false
 const questionButton = ref(false)
+//回答を追跡し配列を初期化。Array.from()メソッドで新しい配列を作成。nullは何も選択されていない状態にする。questions.lengthは配列の要素数の取得
 const selectedAnswers = ref(Array.from({ length: questions.length }, () => null))
+//回答の正誤を表示するために設定。初期値のfalseは最初はどの質問にも正誤が表示されないようにする。
 const showResult = ref(Array.from({ length: questions.length }, () => false))
 
 const handleClick = (questionIndex, answerIndex) => {
@@ -40,6 +43,7 @@ const handleClick = (questionIndex, answerIndex) => {
   // 回答が表示されるようにする
   showResult.value[questionIndex] = true
 }
+//選んだ選択肢が正解しているかを判断・追跡
 const isCorrect = (questionIndex) => {
   return selectedAnswers.value[questionIndex] === questions[questionIndex].answer
 }
