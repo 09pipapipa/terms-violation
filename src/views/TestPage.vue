@@ -1,19 +1,34 @@
 <script setup lang="ts">
-//questionIndex クイズの現在の質問のインデックスを追跡
-//questionButton 各質問に対する選択肢の回答が選択されたかどうかを追跡
-//selectedAnswers ユーザーが選択した各質問の回答を追跡するための配列
-//showResult 各質問の回答が表示されるかどうかを追跡
 import { ref, computed } from 'vue'
 
-//ref 関数を使用してリアクティブな変数を作成
+// タイマーの設定
+const time = ref(600)
+let intervalId = null
+
+const startTimer = () => {
+  intervalId = setInterval(() => {
+    if (time.value > 0) {
+      time.value--
+    } else {
+      clearInterval(intervalId)
+    }
+  }, 1000)
+}
+
+const beforeRouteLeave = (to, from, next) => {
+  clearInterval(intervalId)
+  next()
+}
+
+// ref 関数を使用してリアクティブな変数を作成
 const questionIndex = ref(0)
 
-//クイズ情報を格納する
+// クイズ情報を格納する
 const questions = [
   {
     question: '薬品補充時してはいけないことは？',
     answers: ['防護眼鏡をかける', 'エプロンをする', 'ゴム手袋をかける', '注ぎ口の掃除をする。'],
-    answer: 3 //正解は注ぎ口の～
+    answer: 3 // 正解は注ぎ口の～
   },
   {
     question: '映像パターン2のSNS動画拡散はなぜ起こった？',
@@ -23,18 +38,18 @@ const questions = [
       'お客様が誰もいなかった。',
       '仕事が早く終わったから。'
     ],
-    answer: 0 //正解はスマートフォン
+    answer: 0 // 正解はスマートフォン
   }
 ]
-//questionButtonをリアクティブ変数にする、初期値false
+// questionButtonをリアクティブ変数にする、初期値false
 const questionButton = ref(false)
-//回答を追跡し配列を初期化。Array.from()メソッドで新しい配列を作成。nullは何も選択されていない状態にする。questions.lengthは配列の要素数の取得
+// 回答を追跡し配列を初期化。Array.from()メソッドで新しい配列を作成。nullは何も選択されていない状態にする。questions.lengthは配列の要素数の取得
 const selectedAnswers = ref(Array.from({ length: questions.length }, () => null))
-//回答の正誤を表示するために設定。初期値のfalseは最初はどの質問にも正誤が表示されないようにする。
+// 回答の正誤を表示するために設定。初期値のfalseは最初はどの質問にも正誤が表示されないようにする。
 const showResult = ref(Array.from({ length: questions.length }, () => false))
 
 const handleClick = (questionIndex, answerIndex) => {
-  //if文を使い回答が行われている場合は処理を中止
+  // if文を使い回答が行われている場合は処理を中止
   if (selectedAnswers.value[questionIndex] !== null) {
     return
   }
@@ -43,20 +58,20 @@ const handleClick = (questionIndex, answerIndex) => {
   // 回答が表示されるようにする
   showResult.value[questionIndex] = true
 }
-//選んだ選択肢が正解しているかを判断・追跡
+// 選んだ選択肢が正解しているかを判断・追跡
 const isCorrect = (questionIndex) => {
   return selectedAnswers.value[questionIndex] === questions[questionIndex].answer
 }
 
-//正解数を算出する
+// 正解数を算出する
 const calculateScore = () => {
-  //正解数の初期化
+  // 正解数の初期化
   let score = 0
-  //for ループの条件式 i < questions.length(//questions.lengthは変数の要素の数クイズの質問の数) によって、ループが問題の数だけ繰り返される
+  // for ループの条件式 i < questions.length(//questions.lengthは変数の要素の数クイズの質問の数) によって、ループが問題の数だけ繰り返される
   for (let i = 0; i < questions.length; i++) {
-    //isCorrect(i) を呼び出して、質問 iが正解か判断
+    // isCorrect(i) を呼び出して、質問 iが正解か判断
     if (isCorrect(i)) {
-      score++ //正解ならscoreを1増やす
+      score++ // 正解ならscoreを1増やす
     }
   }
   return score
@@ -67,7 +82,7 @@ const currentQuestion = computed(() => questions[questionIndex.value])
 
 <template>
   <div class="question-container">
-    <div class="test-time">aaa</div>
+    <div class="test-time">{{ time }}</div>
     <div class="question-list">
       <div v-for="(question, index) in questions" :key="index" class="question-content">
         <div class="quiz-number">問{{ index + 1 }}</div>
@@ -160,7 +175,7 @@ const currentQuestion = computed(() => questions[questionIndex.value])
 }
 .test-time {
   position: fixed;
-  top: 60px;
+  top: 70px;
   right: 90px;
   z-index: 1000;
 }
