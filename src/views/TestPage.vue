@@ -2,18 +2,31 @@
 import { ref, computed, onMounted } from 'vue'
 
 // タイマーの設定
-const time = ref(600)
+const minutes = ref(6)
+const seconds = ref(0)
+
 let intervalId = null
 
 const startTimer = () => {
   intervalId = setInterval(() => {
-    if (time.value > 0) {
-      time.value--
-    } else {
+    if (minutes.value === 0 && seconds.value === 0) {
       clearInterval(intervalId)
+      return
+    }
+    if (seconds.value === 0) {
+      minutes.value--
+      seconds.value = 59
+    } else {
+      seconds.value--
     }
   }, 1000)
 }
+
+const formattedTime = computed(() => {
+  const formattedMinutes = minutes.value.toString().padStart(2, '0')
+  const formattedSeconds = seconds.value.toString().padStart(2, '0')
+  return `${formattedMinutes}:${formattedSeconds}`
+})
 onMounted(() => {
   startTimer()
 })
@@ -80,7 +93,7 @@ const currentQuestion = computed(() => questions[questionIndex.value])
 
 <template>
   <div class="question-container">
-    <div class="test-time">{{ time }}</div>
+    <div class="test-time">{{ formattedTime }}</div>
     <div class="question-list">
       <div v-for="(question, index) in questions" :key="index" class="question-content">
         <div class="quiz-number">問{{ index + 1 }}</div>
