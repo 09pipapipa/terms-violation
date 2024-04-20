@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { ref, computed } from 'vue'
+import { ref, computed, onMounted } from 'vue'
 
 // タイマーの設定
 const time = ref(600)
@@ -14,11 +14,9 @@ const startTimer = () => {
     }
   }, 1000)
 }
-
-const beforeRouteLeave = (to, from, next) => {
-  clearInterval(intervalId)
-  next()
-}
+onMounted(() => {
+  startTimer()
+})
 
 // ref 関数を使用してリアクティブな変数を作成
 const questionIndex = ref(0)
