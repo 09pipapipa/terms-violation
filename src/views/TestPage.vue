@@ -67,6 +67,7 @@ const currentQuestion = computed(() => questions[questionIndex.value])
 
 <template>
   <div class="question-container">
+    <div class="test-time">aaa</div>
     <div class="question-list">
       <div v-for="(question, index) in questions" :key="index" class="question-content">
         <div class="quiz-number">問{{ index + 1 }}</div>
@@ -109,8 +110,6 @@ const currentQuestion = computed(() => questions[questionIndex.value])
   width: calc(100% - 60px);
   margin: 0 auto;
   max-width: 1000px;
-}
-.question-list {
 }
 .question-content {
   border: 1px solid #222;
@@ -158,5 +157,11 @@ const currentQuestion = computed(() => questions[questionIndex.value])
 }
 .question-button input[type='radio'] {
   display: none;
+}
+.test-time {
+  position: fixed;
+  top: 60px;
+  right: 90px;
+  z-index: 1000;
 }
 </style>
