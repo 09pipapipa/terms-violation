@@ -93,7 +93,14 @@ const currentQuestion = computed(() => questions[questionIndex.value])
 
 <template>
   <div class="question-container">
-    <div class="test-time">{{ formattedTime }}</div>
+    <div class="time-border">
+      <div class="time-text">残り時間</div>
+      <div class="test-time">{{ formattedTime }}</div>
+    </div>
+    <div class="total-score">
+      <div>正解数</div>
+      <div>{{ calculateScore() }}/ {{ questions.length }}</div>
+    </div>
     <div class="question-list">
       <div v-for="(question, index) in questions" :key="index" class="question-content">
         <div class="quiz-number">問{{ index + 1 }}</div>
@@ -114,18 +121,15 @@ const currentQuestion = computed(() => questions[questionIndex.value])
           </label>
         </div>
         <div v-if="showResult[index]" class="result-message">
-          <p>
+          <div class="quiz-decision">
             {{
               isCorrect(index)
                 ? '正解です'
                 : '不正解、正解は' + questions[index].answers[questions[index].answer] + 'です'
             }}
-          </p>
+          </div>
         </div>
       </div>
-    </div>
-    <div class="total-score">
-      <p>正解数:{{ calculateScore() }}/ {{ questions.length }}</p>
     </div>
   </div>
 </template>
@@ -142,6 +146,7 @@ const currentQuestion = computed(() => questions[questionIndex.value])
   background-color: rgba(#fff, 0.4);
   box-shadow: 2px 2px 4px rgba();
   margin-bottom: 10px;
+  margin-top: 15px;
 }
 .quiz-number {
   text-align: center;
@@ -154,6 +159,7 @@ const currentQuestion = computed(() => questions[questionIndex.value])
   font-size: 32px;
   font-weight: bold;
   line-height: 1.8;
+  margin-top: 15px;
   margin-bottom: 40px;
   position: relative;
   text-align: center;
@@ -164,7 +170,7 @@ const currentQuestion = computed(() => questions[questionIndex.value])
   position: relative;
   grid-template-columns: repeat(2, 1fr);
   gap: 20px;
-  padding: 0 200px 100px;
+  padding: 0 200px 50px;
 }
 .question-answer {
   list-style: none;
@@ -184,10 +190,34 @@ const currentQuestion = computed(() => questions[questionIndex.value])
 .question-button input[type='radio'] {
   display: none;
 }
-.test-time {
+
+.quiz-decision {
+  font-size: 20px;
+  text-align: center;
+  margin-bottom: 40px;
+}
+.time-text {
   position: fixed;
   top: 70px;
-  right: 90px;
+  right: 55px;
   z-index: 1000;
+  font-family: Digital-7, sans-serif;
+  font-size: 20px;
+}
+.test-time {
+  position: fixed;
+  top: 95px;
+  right: 62px;
+  z-index: 1000;
+  font-family: Digital-7, sans-serif;
+  font-size: 25px;
+}
+.total-score {
+  position: fixed;
+  top: 130px;
+  right: 75px;
+  z-index: 1000;
+  font-family: Digital-7, sans-serif;
+  font-size: 20px;
 }
 </style>
