@@ -22,11 +22,13 @@ const startTimer = () => {
   }, 1000)
 }
 
+//時間を分と秒で表示
 const formattedTime = computed(() => {
   const formattedMinutes = minutes.value.toString().padStart(2, '0')
   const formattedSeconds = seconds.value.toString().padStart(2, '0')
   return `${formattedMinutes}:${formattedSeconds}`
 })
+//コンポーネントがマウントされた後にstartTimerが実行
 onMounted(() => {
   startTimer()
 })
@@ -50,6 +52,31 @@ const questions = [
       '仕事が早く終わったから。'
     ],
     answer: 0 // 正解はスマートフォン
+  },
+  {
+    question: 'バイトテロとは？',
+    answers: [
+      '商品棚に土足で入ること。',
+      'ロッカーを撮影すること',
+      '商品を大量廃棄すること',
+      '不適切行為をSNSにあげること'
+    ],
+    answer: 3 // 正解はSNS
+  },
+  {
+    question: 'SNSで炎上事件が起こった際、どの期間記事や情報が残る？',
+    answers: ['１年', '一生', '10年', '記事が消えるまで'],
+    answer: 1 // 正解は一生
+  },
+  {
+    question: '動画内の企業から学生への損害賠償請求額は？',
+    answers: ['150万', '50万', '2850万', '注意と懲戒解雇だけだった'],
+    answer: 2 // 正解は2850万
+  },
+  {
+    question: '動画内の損害賠償の内容は？',
+    answers: ['150万', '50万', '2850万', '注意と懲戒解雇だけだった'],
+    answer: 2 // 正解は2850万
   }
 ]
 // questionButtonをリアクティブ変数にする、初期値false
