@@ -211,7 +211,8 @@ const allAnswered = computed(() => {
       </div>
     </div>
     <div v-if="allAnswered">
-      <p>{{ calculateScore() }}</p>
+      <div v-if="calculateScore() >= 8">合格</div>
+      <div v-else>{{ calculateScore() }}'不合格'</div>
     </div>
   </div>
 </template>
