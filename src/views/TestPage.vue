@@ -161,6 +161,13 @@ const calculateScore = () => {
 }
 
 const currentQuestion = computed(() => questions[questionIndex.value])
+
+//正解数を表示する
+const AnswersCount = computed(() => calculateScore())
+//全問回答したかを確認して条件分岐の用意
+const allAnswered = computed(() => {
+  return selectedAnswers.value.every((answer) => answer !== null)
+})
 </script>
 
 <template>
@@ -202,6 +209,9 @@ const currentQuestion = computed(() => questions[questionIndex.value])
           </div>
         </div>
       </div>
+    </div>
+    <div v-if="allAnswered">
+      <p>{{ selectedAnswers }}</p>
     </div>
   </div>
 </template>
