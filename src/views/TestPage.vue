@@ -211,8 +211,13 @@ const allAnswered = computed(() => {
       </div>
     </div>
     <div v-if="allAnswered">
-      <div v-if="calculateScore() >= 8">合格</div>
-      <div v-else>{{ calculateScore() }}'不合格'</div>
+      <div class="passing-score" v-if="calculateScore() >= 8">
+        {{ calculateScore() }}0点!合格です。
+      </div>
+      <div class="failure-score" v-else>{{ calculateScore() }}0点は不合格です。</div>
+      <p class="test-comment">
+        お疲れ様です。テスト終了となります。画面はこのままで責任者に提出してください
+      </p>
     </div>
   </div>
 </template>
@@ -301,6 +306,26 @@ const allAnswered = computed(() => {
   right: 75px;
   z-index: 1000;
   font-family: Digital-7, sans-serif;
+  font-size: 20px;
+}
+
+/*合否*/
+.passing-score {
+  text-align: center;
+  font-size: 20px;
+  color: red;
+  margin: 20px 0;
+  letter-spacing: 5px;
+}
+.failure-score {
+  text-align: center;
+  font-size: 20px;
+  color: red;
+  margin: 20px 0;
+  letter-spacing: 5px;
+}
+.test-comment {
+  text-align: center;
   font-size: 20px;
 }
 </style>
