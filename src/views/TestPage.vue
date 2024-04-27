@@ -211,7 +211,7 @@ const allAnswered = computed(() => {
       </div>
     </div>
     <div v-if="allAnswered">
-      <p>{{ selectedAnswers }}</p>
+      <p>{{ calculateScore() }}</p>
     </div>
   </div>
 </template>
