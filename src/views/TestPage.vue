@@ -172,18 +172,22 @@ const allAnswered = computed(() => {
 
 <template>
   <div class="question-container">
+    <!-- 6分タイマー -->
     <div class="time-border">
       <div class="time-text">残り時間</div>
       <div class="test-time">{{ formattedTime }}</div>
     </div>
+    <!-- 正解数カウント -->
     <div class="total-score">
       <div>正解数</div>
       <div>{{ calculateScore() }}/ {{ questions.length }}</div>
     </div>
+    <!-- 4択クイズ枠 -->
     <div class="question-list">
       <div v-for="(question, index) in questions" :key="index" class="question-content">
         <div class="quiz-number">問{{ index + 1 }}</div>
         <h2 class="quiz-question">{{ question.question }}</h2>
+        <!-- 4択クイズ -->
         <div class="question-answer">
           <label
             v-for="(answer, answerIndex) in question.answers"
@@ -199,6 +203,7 @@ const allAnswered = computed(() => {
             <span :class="`question-text${answerIndex + 1}`">{{ answer }}</span>
           </label>
         </div>
+        <!-- クリックしたら正否がでる -->
         <div v-if="showResult[index]" class="result-message">
           <div class="quiz-decision">
             {{
@@ -210,10 +215,13 @@ const allAnswered = computed(() => {
         </div>
       </div>
     </div>
+    <!-- 全問回答したら点数がでる -->
     <div v-if="allAnswered">
+      <!-- 合格 -->
       <div class="passing-score" v-if="calculateScore() >= 8">
         {{ calculateScore() }}0点!合格です。
       </div>
+      <!-- 不合格 -->
       <div class="failure-score" v-else>{{ calculateScore() }}0点は不合格です。</div>
       <p class="test-comment">
         お疲れ様です。テスト終了となります。画面はこのままで責任者に提出してください
@@ -223,6 +231,7 @@ const allAnswered = computed(() => {
 </template>
 
 <style scoped>
+/*4択装飾*/
 .question-container {
   position: relative;
   width: calc(100% - 60px);
@@ -284,6 +293,7 @@ const allAnswered = computed(() => {
   text-align: center;
   margin-bottom: 40px;
 }
+/*タイマー装飾*/
 .time-text {
   position: fixed;
   top: 70px;
