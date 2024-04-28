@@ -8,6 +8,7 @@
       <p class="confirmation-text">ボタンを押すと始まりテストは4択全10問となります。</p>
       <p class="confirmation-text">テスト終了後の画面は消さずに端末を従業員へ渡してください。</p>
     </div>
+    <!-- 仮動画なので差し替え予定 -->
     <div class="compliance_video">
       <video controls width="550">
         <source src="/media/temporary.mp4" type="video/webm" />
